@@ -1,0 +1,86 @@
+query primary_sale {
+  listing(where: {seller_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}, status: {_eq: "active"}, token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}}, distinct_on: token_pk) {
+    token {
+      pk
+      name
+      supply
+    }
+  }
+}
+# list active primary sales
+
+query secondary_listing {
+  listing(where: {seller_address: {_neq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}, status: {_eq: "active"}, token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}}, distinct_on: token_pk) {
+    token {
+      pk
+      name
+      supply
+    }
+  }
+}
+# list active secondary sales
+
+query secondary_sold {
+  listing_sale(where: {token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}, seller_address: {_neq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}) {
+    price
+    token_pk
+    seller_address
+    token {
+      name
+    }
+  }
+}
+
+# list sold_items on secondary
+
+query primary_sold {
+  listing_sale(where: {token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}, seller_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}) {
+    price
+    token_pk
+    seller_address
+    token {
+      name
+    }
+  }
+}
+
+# list primary sales of the artist
+
+query primary_sold {
+  listing_sale(where: {token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}, seller_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}, distinct_on: timestamp) {
+    price
+    token_pk
+    seller_address
+    buyer_address
+    timestamp
+    token {
+      name
+    }
+    listing {
+      amount
+      amount_left
+    }
+  }
+}
+
+# extended version of the previous query, can count how many sales has performed on primary sales as a creator
+
+query primaryAndSecondary_sold {
+  listing_sale(where: {token: {creators: {creator_address: {_eq: "tz1YAZ5Vkyc1Gpdy342uT33FYYFhyn2v6ibh"}}}, timestamp: {_gt: "2022-07-24T16:36:59+00:00"}}, distinct_on: timestamp) {
+    price
+    token_pk
+    seller_address
+    buyer_address
+    timestamp
+    token {
+      name
+    }
+    listing {
+      amount
+      amount_left
+    }
+  }
+}
+
+
+#both sales on primary and secondary market as a creator
