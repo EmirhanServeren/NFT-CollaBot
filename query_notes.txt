@@ -84,3 +84,26 @@ query primaryAndSecondary_sold {
 
 
 #both sales on primary and secondary market as a creator
+
+
+
+# find wallet address by Twitter User or Domain
+
+query findWallet_byDomainAddress {
+  tzd_domain(where: {id: {_eq: "emirhanserveren.tez"}}) {
+    owner
+    token {
+      holders {
+        holder {
+          twitter
+        }
+      }
+    }
+  }
+}
+
+query findWallet_byTwitter {
+  tzd_domain(where: {token: {holders: {holder: {twitter: {_eq: "https://twitter.com/ServerenEmirhan"}}}}}) {
+    owner
+  }
+}
