@@ -9,4 +9,20 @@ NFT CollaBot is a data-oriented project designed by the requirements of NFT ecos
 
 ## REQUIREMENT ANALYSIS
 
-Data expertises are widely used solutions in digital age. Many decision-makers applies data-oriented solutions to optimize their business performance. As a data professional and NFT artist, noticed requirements of NFT artists. There are hundreds of NFT artists who make their living with this NFTs. They are consuming too much effort for keeping track of their sale performances. It is approximately impossible to chase data on rapid NFT ecosystem. Talented developer [@NFTBiker](http://nftbiker.xyz) has accurate solution for this case. In this sense, decided to bring a value to ecosystem like this generous people. To provide a value, proposed a design that contains visual charts for Tezos NFT community that describes the story behind their NFT Journey.
+Data expertises are widely used solutions in digital age. Many decision-makers applies data-oriented solutions to optimize their business performance. As a data professional and NFT artist on Tezos ecosystem, noticed requirements of NFT artists. There are hundreds of NFT artists who make their living with this NFTs. They are consuming too much effort for keeping track of their sale performances. It is approximately impossible to chase data on rapid NFT ecosystem. Talented developer [@NFTBiker](http://nftbiker.xyz) has accurate solution for this case. In this sense, decided to bring a value to ecosystem like this generous people. To provide a value, proposed a design that contains visual charts for Tezos NFT community that describes the story behind their NFT Journey.
+
+## GLOSARRY
+
+There are many terms that thoough to identify their meanings and usage. Most of the terms are similar for NFT artists and collectors but not for the newbies on the community. Main goal is to document glosarry to evaluate a beginner guide for the newcomers of Tezos NFT ecosystem.
+
+|Term|Description|API Meaning|
+|--|--|--|
+|Mint| | |
+|List| | |
+|Primary| | |
+|Secondary| | |
+|Sold Out| | |
+|Gifting an NFT|||
+|Edition(s)|NFT Creators are able to mint their NFTs whether a single edition or multiple editions. This feature provides the opportunity of achieving multiple collectors in a single work or specializing it.|Supply|
+|Burning Edition(s)|||
+
