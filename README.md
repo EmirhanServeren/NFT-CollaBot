@@ -26,3 +26,7 @@ There are many terms that thoough to identify their meanings and usage. Most of 
 |Gifting an NFT|||
 |Burning Edition(s)|NFT Creators applies to burn an edition/multiple editions of a NFT for several cases. They mostly announce this operation on Twitter like *"Burning Remaining Editions on Saturday"*. They perform the burning operation on objkt.com with **Burn Token**||
 
+## HOW TO READ CODE?
+
+
+
