@@ -19,10 +19,10 @@ There are many terms that thoough to identify their meanings and usage. Most of 
 |--|--|--|
 |Mint| | |
 |List| | |
+|Edition(s)|NFT Creators are able to mint their NFTs whether a single edition or multiple editions. This feature provides the opportunity of achieving multiple collectors in a single work or specializing it.|Supply|
 |Primary| | |
 |Secondary| | |
-|Sold Out| | |
+|Sold Out|This is a common word between NFT Creators to celebrate that they have sold all of the editions of a NFT in primary market. | |
 |Gifting an NFT|||
-|Edition(s)|NFT Creators are able to mint their NFTs whether a single edition or multiple editions. This feature provides the opportunity of achieving multiple collectors in a single work or specializing it.|Supply|
-|Burning Edition(s)|||
+|Burning Edition(s)|NFT Creators applies to burn an edition/multiple editions of a NFT for several cases. They mostly announce this operation on Twitter like *"Burning Remaining Editions on Saturday"*. They perform the burning operation on objkt.com with **Burn Token**||
 
