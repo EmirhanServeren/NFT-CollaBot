@@ -8,11 +8,16 @@ import re
 import string
 from io import StringIO
 
+import streamlit as st
+
 import random
 import time
 from datetime import *
 import math
 import contextlib         # for error handling
+
+st.title('NFT CollaBot')
+tez_domain_input=st.text_input('Please enter your Tezos Domain:')
 
 # objktcom api endpoint will be used for several times to evaluate queries
 api_endpoint = 'https://data.objkt.com/v2/graphql'
@@ -66,6 +71,9 @@ def findWalletAddress_byTezDomain(tezos_domain):
         return str(creator_tezDomain[0]['owner'])
     else:           # if query does not respond any name, then there is no wallet matched with the related tezos domain
         return False
+
+
+st.write(findWalletAddress_byTezDomain(tez_domain_input))
 
 def isWalletAddress(wallet_address):
     account_data_url=f"https://api.tzkt.io/v1/accounts/{wallet_address}" # tzkt.io API endpoint
@@ -293,6 +301,8 @@ def creator_primary_sales_df(wallet_address):
     #creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reindex(sale_date_range,fill_value=0)
 
     return creator_primary_sales_dataFrame                                             # return the data frame
+
+st.write(creator_primary_sales_df(findWalletAddress_byTezDomain(tez_domain_input)))
 
 def visualized_creator_primary_sales(wallet_address):
     if isAvailableWalletAddress(wallet_address) is not True:
