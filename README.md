@@ -13,7 +13,7 @@ Data expertise is widely used solutions in digital age. Many decision-makers app
 
 ## GLOSARRY
 
-There are many terms that thoough to identify their meanings and usage. Most of the terms are similar for NFT artists and collectors but not for the newbies on the community. Main goal is to document glosarry to evaluate a beginner guide for the newcomers of Tezos NFT ecosystem.
+There are many terms that thoough to identify their meanings and usage if yuo are not familiar with NFT Community before. Most of the terms are similar for NFT artists and collectors but not for the newbies on the community. Main goal is to document glosarry to evaluate a beginner guide for the newcomers of Tezos NFT ecosystem.
 
 |Term|Description|API Meaning|
 |--|--|--|
@@ -24,7 +24,6 @@ There are many terms that thoough to identify their meanings and usage. Most of 
 |Primary|A sale can be performed in two ways: Primary or Secondary. Primary sale means the sale of a NFT from creators itself to a collector. If a NFT artist achieves a sale that he/she minted, then it is called as a primary sale.| seller_address,_eq|
 |Secondary| Secondary sale is a term stands for sales from a non-creator seller to a buyer. If the seller side is not the creator of this NFT, then it is a secondary sale. | seller_address,_neq|
 |Sold Out|This is a common word between NFT Creators to celebrate that they have sold all of the editions of a NFT in primary market. | |
-|Gifting an NFT|||
 |Burning Edition(s)|NFT Creators applies to burn an edition/multiple editions of a NFT for several cases. They mostly announce this operation on Twitter like *"Burning Remaining Editions on Saturday"*. They perform the burning operation on objkt.com with **Burn Token**. It is crucial to know that burning NFT editions are kind of *sending*  operation. You are sending burned edition(s) to *tz1burnburnburnburnburnburnburjAYjjX* to complete the operation after you are clicking *Burn Token*.| *tz1burnburnburnburnburnburnburjAYjjX* tezos address is shown on **holders**|
 |Owners|NFTs are owned and collected by wallet adress(es). These are shown as **Owners** in the objkt.com UI. NFT Creator is automatically an owner of the NFT after a mint operation. Additionally, a NFT collector is able to own a NFT after buying it.|Holders|
 
