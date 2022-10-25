@@ -28,6 +28,16 @@ There are many terms that thoough to identify their meanings and usage. Most of 
 |Burning Edition(s)|NFT Creators applies to burn an edition/multiple editions of a NFT for several cases. They mostly announce this operation on Twitter like *"Burning Remaining Editions on Saturday"*. They perform the burning operation on objkt.com with **Burn Token**. It is crucial to know that burning NFT editions are kind of *sending*  operation. You are sending burned edition(s) to *tz1burnburnburnburnburnburnburjAYjjX* to complete the operation after you are clicking *Burn Token*.| *tz1burnburnburnburnburnburnburjAYjjX* tezos address is shown on **holders**|
 |Owners|NFTs are owned and collected by wallet adress(es). These are shown as **Owners** in the objkt.com UI. NFT Creator is automatically an owner of the NFT after a mint operation. Additionally, a NFT collector is able to own a NFT after buying it.|Holders|
 
+## MILESTONES
+
+There are many achievements of NFT CollaBot. To accomplish, it is inevitable to approach with an agile strategy. I have spotted milestones as:
+
+* Understanding objkt.com API
+* Creating Modules to Extract and Analyze Data
+* Deploying on Streamlit
+* Deploying on Discord
+* Deploying on Twitter
+
 ## HOW TO READ CODE?
 
 
