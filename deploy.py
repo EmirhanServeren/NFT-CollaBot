@@ -17,7 +17,7 @@ import math
 import contextlib         # for error handling
 
 st.title('NFT CollaBot')
-tez_domain_input=st.text_input('Please enter your Tezos Domain:')
+st_user_input=st.text_input('Please enter your Tezos Wallet Address/Domain or Twitter Username registered to your Tezos Profile:')
 
 # objktcom api endpoint will be used for several times to evaluate queries
 api_endpoint = 'https://data.objkt.com/v2/graphql'
@@ -73,7 +73,7 @@ def findWalletAddress_byTezDomain(tezos_domain):
         return False
 
 
-st.write(findWalletAddress_byTezDomain(tez_domain_input))
+#st.write(findWalletAddress_byTezDomain(tez_domain_input))
 
 def isWalletAddress(wallet_address):
     account_data_url=f"https://api.tzkt.io/v1/accounts/{wallet_address}" # tzkt.io API endpoint
@@ -91,6 +91,18 @@ def isAvailableWalletAddress(wallet_address):
         #print("No Tezos domain/Twitter address exists for this input")
         return False
     else: return True
+
+def recognize_user_input(user_input):
+    #user_input=str(input("Please enter your tezos wallet/domain or twitter address: "))
+    if len(user_input) == 36 and user_input.startswith("tz"):
+        return isWalletAddress(user_input)
+    elif user_input.endswith(".tez"):
+        return findWalletAddress_byTezDomain(user_input)
+    elif user_input:
+        return findWalletAddress_byTwitter(user_input)
+    else: return False
+
+st.write(recognize_user_input(st_user_input))
 
 counter_N=[0]
 def creator_allCreated_NFTs(wallet_address):
@@ -302,7 +314,7 @@ def creator_primary_sales_df(wallet_address):
 
     return creator_primary_sales_dataFrame                                             # return the data frame
 
-st.write(creator_primary_sales_df(findWalletAddress_byTezDomain(tez_domain_input)))
+st.write(creator_primary_sales_df(recognize_user_input(st_user_input)))
 
 def visualized_creator_primary_sales(wallet_address):
     if isAvailableWalletAddress(wallet_address) is not True:
