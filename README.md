@@ -52,7 +52,6 @@ The script is constructed with function method. There are functions that invoked
 
 |**function name**|**technical description**|**dependent function(s)**|**category**|**user-level explanation**|
 |--|--|--|--|--|
-| <img width=200/>|<img width=500/> | <img width=150/>| <img width=80/> | <img width=500/>|
 |check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023. the script checks for the current API endpoint. |- | API-Related | - |
 |findWalletAddress_byTwitter(twitter_address)|  | | Input Handling | Enables users to ask their statistics by using their twitter username registered to their tezos profile as an input |
 |findWalletAddress_byTezDomain(tezos_domain)| | | Input Handling | Enables users to ask their statistics by using their tezos domain as an input |
