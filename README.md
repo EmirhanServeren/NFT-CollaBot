@@ -31,10 +31,13 @@ There are many terms that thoough to identify their meanings and usage if yuo ar
 
 There are many achievements of NFT CollaBot. To accomplish, it is inevitable to approach with an agile strategy. I have spotted milestones as:
 
-* Understanding objkt.com API
-* Creating Modules to Extract and Analyze Data
-* Deploying on Streamlit
-* Deploying on Discord
+>Completed
+* Understanding objkt.com API *-Glosarry on Readme File*
+* Creating Modules to Extract and Analyze Data *-Jupyter Notebook*
+>In Progress
+* Deploying on [Streamlit](https://emirhanserveren-nft-collabot-deploy-mml6j8.streamlitapp.com/) *-deploy.py script*
+>Future Objective
+* Deploying on Discord 
 * Deploying on Twitter
 
 ## HOW TO READ CODE?
