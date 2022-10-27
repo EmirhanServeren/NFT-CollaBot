@@ -51,8 +51,8 @@ There are two files that constructs the development:
 The script is constructed with function method. There are functions that invoked depending on each other. It is impossible to get insight into the code without understanding how functions work.
 
 |**function name**|**technical description**|**dependent function(s)**|**category**|**user-level explanation**|
-|--|--|--|--|--|
-|check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023. the script checks for the current API endpoint. |- | API-Related | - |
+|:-:|--|--|:-:|--|
+|check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023 <br /> the script checks for the current API endpoint |- | API-Related | - |
 |findWalletAddress_byTwitter(twitter_address)|  | | Input Handling | Enables users to ask their statistics by using their twitter username registered to their tezos profile as an input |
 |findWalletAddress_byTezDomain(tezos_domain)| | | Input Handling | Enables users to ask their statistics by using their tezos domain as an input |
 |isWalletAddress(wallet_address)| Requests to [tzkt.io](https://tzkt.io/) API endpoint using the user input and checks is there any wallet address matches on Tezos ecosystem with this input | - | Input Handling |The platform warns the users for the wrong inputs|
@@ -60,7 +60,7 @@ The script is constructed with function method. There are functions that invoked
 |recognize_user_input(user_input) | | isWalletAddress(), findWalletAddress_byTwitter(), findWalletAddress_byTezDomain()| Input Handling |Identifies user's input type|
 |creator_all_NFT_sales(wallet_address)| | |  Token Trade | |
 |creator_availablePrimary_NFTs(wallet_address)| |  |Token Mint | |
-|creator_primary_NFT_sales(wallet_address) | Requests data from API, related to primary sales of the questioned NFT creator. The NFT Creator's wallet address informations is passed as an argument on the function. | |  Token Trade |  |
+|creator_primary_NFT_sales(wallet_address) | Requests data from API <br /> related to primary sales of the questioned NFT creator. The NFT Creator's wallet address informations is passed as an argument on the function. | |  Token Trade |  |
 |creator_primary_sales_df(wallet_address) | Performs data cleaning and analysis in the function for evaluating an output. |creator_primary_NFT_sales() | Token Trade | |
 
 
