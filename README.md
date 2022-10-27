@@ -42,5 +42,32 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 
 ## HOW TO READ CODE?
 
+There are two files that constructs the development:
+* main.ipynb : contains all of the modules with their descriptions, *kind of test environment*. Most comprehensive file about the development phase.
+* deploy.py : contains the script that live on streamlit, *kind of prod environment*
+
+### deploy.py
+
+The script is constructed with function method. There are functions that invoked depending on each other. It is impossible to get insight into the code without understanding how functions work.
+
+|**function name**|**technical description**|**dependent function(s)**|**category**|**user-level explanation**|
+|--|--|--|--|--|
+|check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023. the script checks for the current API endpoint. |- | API-Related | - |
+|findWalletAddress_byTwitter(twitter_address)| | | Input Handling | |
+|findWalletAddress_byTezDomain(tezos_domain)| | | Input Handling | |
+|isWalletAddress(wallet_address)| | | Input Handling | |
+|isAvailableWalletAddress(wallet_address) | | | Input Handling | |
+|recognize_user_input(user_input) | | | Input Handling | |
+|creator_all_NFT_sales(wallet_address)| | |  Token Trade | |
+|creator_primary_NFT_sales(wallet_address) | Requests data from API, related to primary sales of the questioned NFT creator. The NFT Creator's wallet address informations is passed as an argument on the function. | |  Token Trade |  |
+|creator_primary_sales_df(wallet_address) | Performs data cleaning and analysis in the function for evaluating an output. |creator_primary_NFT_sales(wallet_address) | Token Trade | |
+
+
+
+
+
+
+
+
 
 
