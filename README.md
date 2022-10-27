@@ -40,6 +40,19 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 * Deploying on Discord 
 * Deploying on Twitter
 
+## HOW NFT COLLABOT WORKS?
+
+It is significant to percieve how NFT CollaBot interacts with the users. NFT CollaBot has designed as an initial-term user interaction. The software product that provides statistics as a result of an input.
+
+> **HOW STREAMLIT WORKS?**
+
+In Streamlit, NFT CollaBot only contains an input component that asks for the user's Tezos wallet address/domain or registered Twitter username to give an output.
+
+TezosDomainAsInput
+    NFT CollaBot->>User: Please enter your Tezos Wallet Address/Domain or Twitter Username registered to your Tezos Profile:
+    User-->>NFT CollaBot: mytezosdomain.tez
+    Alice-)John: **data table about mydomain.tez primary sales over months**
+
 ## HOW TO READ CODE?
 
 There are two files that constructs the development:
