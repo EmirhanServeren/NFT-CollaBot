@@ -50,7 +50,7 @@ There are two files that constructs the development:
 
 The script is constructed with function method. There are functions that invoked depending on each other. It is impossible to get insight into the code without understanding how functions work.
 
-|**function name**|**technical description**|**dependent function(s)**|**category**|**user-level explanation**|
+|**function name**|**technical description**&nbsp;&nbsp;|**dependent function(s)**|**category**|**user-level explanation**&nbsp;|
 |--|----|--|--|----|
 |check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023. the script checks for the current API endpoint. |- | API-Related | - |
 |findWalletAddress_byTwitter(twitter_address)|  | | Input Handling | Enables users to ask their statistics by using their twitter username registered to their tezos profile as an input |
