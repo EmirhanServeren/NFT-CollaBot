@@ -29,7 +29,7 @@ There are many terms that thoough to identify their meanings and usage if yuo ar
 
 ## MILESTONES
 
-There are many achievements of NFT CollaBot. To accomplish, it is inevitable to approach with an agile strategy. I have spotted milestones as:
+There are many achievements of NFT CollaBot. To accomplish, it is inevitable to approach with an agile strategy. I have spotted milestones to complete objectives step by step. Objectives as:
 
 >Completed
 * Understanding objkt.com API *-Glosarry on Readme File*
