@@ -46,8 +46,8 @@ def findWalletAddress_byTwitter(twitter_address):
     creator_twitter = creator_twitter ['data']['tzd_domain']
     if creator_twitter != [] and creator_twitter[0]['owner'] != "null":
         return str(creator_twitter[0]['owner'])
-    else:            # if query does not respond any name, then there is no wallet matched with the related twitter address
-        return False
+    else:
+        st.write("There are no Tezos profiles registered with this username. Please enter an input again<3")
 
 def findWalletAddress_byTezDomain(tezos_domain):
     creator_walletAddress_byDomain_query="""query findWallet_byDomainAddress {
@@ -69,27 +69,24 @@ def findWalletAddress_byTezDomain(tezos_domain):
     creator_tezDomain = creator_tezDomain ['data']['tzd_domain']
     if creator_tezDomain != [] and creator_tezDomain[0]['owner'] != "null":
         return str(creator_tezDomain[0]['owner'])
-    else:           # if query does not respond any name, then there is no wallet matched with the related tezos domain
-        return False
-
-
-#st.write(findWalletAddress_byTezDomain(tez_domain_input))
+    else:
+        st.write("Unavailable Tezos Domain. Please enter an input again<3")
 
 def isWalletAddress(wallet_address):
     account_data_url=f"https://api.tzkt.io/v1/accounts/{wallet_address}" # tzkt.io API endpoint
     response = requests.get(account_data_url)
     with contextlib.suppress(KeyError or json.decoder.JSONDecodeError):
         response=response.json()
-        if response['type']=="empty":      # checking the responded data that user exists or not
-            return False
+        if response['type']!="empty":
+            return wallet_address
+        else: st.write("Unavailable tezos wallet address. Please enter an input again<3")
 
 def isAvailableWalletAddress(wallet_address):
     if isWalletAddress(wallet_address) is False:
-        #print("No Tezos wallet address exists with this input")
         return False
     elif wallet_address is False:
         #print("No Tezos domain/Twitter address exists for this input")
-        return False
+        return
     else: return True
 
 def recognize_user_input(user_input):
@@ -100,9 +97,8 @@ def recognize_user_input(user_input):
         return findWalletAddress_byTezDomain(user_input)
     elif user_input:
         return findWalletAddress_byTwitter(user_input)
-    else: return False
 
-st.write(recognize_user_input(st_user_input))
+#st.write(recognize_user_input(st_user_input))
 
 counter_N=[0]
 def creator_allCreated_NFTs(wallet_address):
@@ -314,12 +310,10 @@ def creator_primary_sales_df(wallet_address):
 
     return creator_primary_sales_dataFrame                                             # return the data frame
 
-st.write(creator_primary_sales_df(recognize_user_input(st_user_input)))
+with contextlib.suppress(KeyError):
+    if recognize_user_input(st_user_input) is False:
+        #st.write(recognize_user_input(st_user_input))
+        recognize_user_input(st_user_input)
+    else:
+        st.write(creator_primary_sales_df(recognize_user_input(st_user_input)))
 
-def visualized_creator_primary_sales(wallet_address):
-    if isAvailableWalletAddress(wallet_address) is not True:
-        print("You entered unregistered input. Please enter an available wallet address, tezos domain or registered twitter address with your objkt.com profile.")
-        return         # to prevent executing rest of the function
-    dataFrame_toPlot=creator_primary_sales_df(wallet_address)
-    # use pandas data frame plot to visualize the data
-    dataFrame_toPlot.plot(kind='bar',title=f"Revenue of the Artist {wallet_address} on Primary Market by Month",xlabel="Month",ylabel="Revenue (by Tezos)")
