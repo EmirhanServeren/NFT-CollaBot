@@ -39,6 +39,7 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 >Future Objective
 * Deploying on Discord 
 * Deploying on Twitter
+* Solana Marketplaces *(exchange.art, formfunction)* Extension
 
 ## HOW NFT COLLABOT WORKS?
 
