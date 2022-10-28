@@ -50,8 +50,8 @@ In Streamlit, NFT CollaBot only contains an input component that asks for the us
 
 ```mermaid
   sequenceDiagram UserInteraction;
-      user-->nft collabot;
-      nft collabot-->user;
+      user->>nft collabot: Input
+      nft collabot->>user: Stats
 ```
 
 ## HOW TO READ CODE?
