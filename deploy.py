@@ -308,6 +308,8 @@ def creator_primary_sales_df(wallet_address):
 
     return creator_primary_sales_dataFrame                                             # return the data frame
 
+
+# the part where NFT CollaBot responds to user with an output
 with contextlib.suppress(KeyError):
     if recognize_user_input(st_user_input) is False:
         #st.write(recognize_user_input(st_user_input))
