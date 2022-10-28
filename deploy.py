@@ -98,8 +98,6 @@ def recognize_user_input(user_input):
     elif user_input:
         return findWalletAddress_byTwitter(user_input)
 
-#st.write(recognize_user_input(st_user_input))
-
 counter_N=[0]
 def creator_allCreated_NFTs(wallet_address):
     if counter_N[0]>0:global nft_pk_val
