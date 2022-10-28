@@ -49,11 +49,9 @@ It is significant to percieve how NFT CollaBot interacts with the users. NFT Col
 In Streamlit, NFT CollaBot only contains an input component that asks for the user's Tezos wallet address/domain or registered Twitter username to give an output.
 
 ```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
+  sequenceDiagram UserInteraction;
+      user-->nft collabot;
+      nft collabot-->user;
 ```
 
 ## HOW TO READ CODE?
