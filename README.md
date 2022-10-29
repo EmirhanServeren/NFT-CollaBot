@@ -93,8 +93,7 @@ As an artist and a newbie data professional, tried to do my best and put my effo
 
 I would like to finish the document with a note and an animation of mine created for NFT CollaBot.
 
-![](https://assets.objkt.media/file/assets-003/QmfAgy4vCKPJK3S8RdzuASL4B2wjoQVhuV9VV4NiBYPzr7/artifact =820x820)
-
+<img src="[https://your-image-url.type](https://assets.objkt.media/file/assets-003/QmfAgy4vCKPJK3S8RdzuASL4B2wjoQVhuV9VV4NiBYPzr7/)" width="820" height="820">
 
 
 
