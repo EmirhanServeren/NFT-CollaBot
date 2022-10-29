@@ -33,9 +33,12 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 
 >Completed
 * Understanding objkt.com API *-Glosarry on Readme File*
-* Creating Modules to Extract and Analyze Data *-Jupyter Notebook*
+* Creating Modules to Extract and Analyze Sale Data *-Jupyter Notebook*
+* Creating Modules to Recommand Random NFTs by Tag
+
 >In Progress
 * Deploying on [Streamlit](https://emirhanserveren-nft-collabot-deploy-mml6j8.streamlitapp.com/) *-deploy.py script*
+
 >Future Objective
 * Deploying on Discord 
 * Deploying on Twitter
