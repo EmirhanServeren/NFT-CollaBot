@@ -87,13 +87,13 @@ The script is constructed with function method. There are functions that invoked
 |creator_primary_sales_df(wallet_address) | Performs data cleaning and analysis in the function for evaluating an output. |creator_primary_NFT_sales() | Token Trade | |
 
 
-## BONUS: AUTHOR NOTE
+### BONUS: AUTHOR NOTE
 
 As an artist and a newbie data professional, tried to do my best and put my effort to provide all artist data-oriented software product. I strongly believe data can construct sustainable tomorrows for our world and community. As in every case, data can bring a value and sustainability in NFT Community.  I hope this open-source project will be observed and used by many developers and artists. I would be appriciated if I can accomplish to contribute the journey of every artist in NFT community.
 
-Wanted to finish the document with a note and an animation of mine created for NFT CollaBot.
+I would like to finish the document with a note and an animation of mine created for NFT CollaBot.
 
-![](https://assets.objkt.media/file/assets-003/QmfAgy4vCKPJK3S8RdzuASL4B2wjoQVhuV9VV4NiBYPzr7/artifact)
+![](https://assets.objkt.media/file/assets-003/QmfAgy4vCKPJK3S8RdzuASL4B2wjoQVhuV9VV4NiBYPzr7/artifact =820x820)
 
 
 
