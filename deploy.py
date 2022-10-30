@@ -281,33 +281,89 @@ def creator_primary_sales_df(wallet_address):
     creator_primary_sales_dataFrame['price']=creator_primary_sales_dataFrame['price']/1000000
     # manipulate timestamp attribute data type as date
     creator_primary_sales_dataFrame['timestamp']=pd.to_datetime(creator_primary_sales_dataFrame['timestamp']).dt.date
-    # convert all days to 1 for grouping by year-month
-    # ...this line will enable to fill missing months on data frame
+    # convert all days to 1 for grouping by year-month pair
     creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda dt: dt.replace(day=1))
 
     creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.groupby('timestamp').sum()
     del creator_primary_sales_dataFrame['token_pk']
 
-    # evaluating a solution to obtain missing month(s) between year and month
-    firstMintDate_ofCreator=creator_allCreated_NFTs(wallet_address)        # assign data frame of all NFTs of the creator
-    firstMintDate_ofCreator=firstMintDate_ofCreator.loc[0]['timestamp']    # then assign first NFT's time to the variable
-    firstMintDate_ofCreator=firstMintDate_ofCreator.strftime('%Y-%m')      # drop day from the date
-    # define a range to fill missing months in data frame
-    sale_date_range = pd.date_range(
-                            start=firstMintDate_ofCreator,                 # using the variable for calculating minting range
-                            end=creator_primary_sales_dataFrame.index[len(creator_primary_sales_dataFrame)-1]).to_period('m')
-
     creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.reset_index()           # convert to data frame from pivot table
     creator_primary_sales_dataFrame['timestamp'] = creator_primary_sales_dataFrame['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
     creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.set_index('timestamp')  # then set date as index
 
-    #...there is missing part right here...
-    #...fill the data frame with missing months in case they exist
-    #...but this code fills all values
-    #creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reindex(sale_date_range,fill_value=0)
+    # evaluating a solution to obtain missing month(s) between year and month
+    firstMintDate_ofCreator=creator_allCreated_NFTs(wallet_address)        # assign data frame of all NFTs of the creator
+    firstMintDate_ofCreator=firstMintDate_ofCreator.loc[0]['timestamp']    # then assign first NFT's time to the variable
+    firstMintDate_ofCreator=firstMintDate_ofCreator.strftime('%Y-%m')      # drop day from the date
 
-    return creator_primary_sales_dataFrame                                             # return the data frame
+    def date_range_df(firstMintDate_ofCreator):
+        # define a range to fill missing months -if exists- in data frame
+        sale_date_range = pd.date_range(
+                            start=firstMintDate_ofCreator,         # using the variable for calculating minting range
+                            end=creator_primary_sales_dataFrame.index[len(creator_primary_sales_dataFrame)-1]).to_period('m')
+        # create a data frame to save all of the months in the range
+        sale_date_range=pd.DataFrame(sale_date_range)
+        sale_date_range=sale_date_range.drop_duplicates(keep="first")
+        sale_date_range['price']= 0
+        sale_date_range=sale_date_range.rename(columns={0:'timestamp'})
+        sale_date_range['timestamp'] = sale_date_range['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+        sale_date_range=sale_date_range.groupby('timestamp').sum()
+        return sale_date_range
 
+    creator_primary_sales=date_range_df(firstMintDate_ofCreator)    # assign the data frame returned from the function
+
+    creator_primary_sales=creator_primary_sales.reset_index()       # then reset index before mapping
+    creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reset_index()
+
+    # use mapping to fill new data frame with values, keep NaN non-existing months on actual data frame
+    creator_primary_sales['price']=creator_primary_sales['timestamp'].map(creator_primary_sales_dataFrame.set_index('timestamp')['price'])
+    creator_primary_sales=creator_primary_sales.fillna(0)
+
+    return creator_primary_sales.set_index('timestamp')
+
+def creator_primarySales_byEditions_df(wallet_address):
+    creator_primary_sales_dataFrame=creator_primary_NFT_sales(wallet_address)
+
+    # deleting unnecessary attributes from data frame
+    del creator_primary_sales_dataFrame['buyer_address']
+    del creator_primary_sales_dataFrame['price']
+
+    # manipulate timestamp attribute data type as date
+    creator_primary_sales_dataFrame['timestamp']=pd.to_datetime(creator_primary_sales_dataFrame['timestamp']).dt.date
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda dt: dt.replace(day=1))
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+
+    creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.groupby('timestamp').count()
+
+    # implementing the same algorithm with the function above to fill missing months, in case they exist
+    firstMintDate_ofCreator=creator_allCreated_NFTs(wallet_address)
+    firstMintDate_ofCreator=firstMintDate_ofCreator.loc[0]['timestamp']
+    firstMintDate_ofCreator=firstMintDate_ofCreator.strftime('%Y-%m')
+
+    def date_range_df(firstMintDate_ofCreator):
+        sale_date_range = pd.date_range(
+                            start=firstMintDate_ofCreator,
+                            end=creator_primary_sales_dataFrame.index[len(creator_primary_sales_dataFrame)-1]).to_period('m')
+        sale_date_range=pd.DataFrame(sale_date_range)
+        sale_date_range=sale_date_range.drop_duplicates(keep="first")
+        sale_date_range['token_pk']= 0
+        sale_date_range=sale_date_range.rename(columns={0:'timestamp'})
+        sale_date_range['timestamp'] = sale_date_range['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+        sale_date_range=sale_date_range.groupby('timestamp').sum()
+        return sale_date_range
+
+    creator_primary_sales=date_range_df(firstMintDate_ofCreator)
+
+    creator_primary_sales=creator_primary_sales.reset_index()
+    creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reset_index()
+
+    creator_primary_sales['token_pk']=creator_primary_sales['timestamp'].map(creator_primary_sales_dataFrame.set_index('timestamp')['token_pk'])
+    creator_primary_sales=creator_primary_sales.fillna(0)
+
+    creator_primary_sales['token_pk']=creator_primary_sales['token_pk'].astype(int)
+    creator_primary_sales=creator_primary_sales.rename(columns={'token_pk':'sold_editions'})
+
+    return creator_primary_sales
 
 # the part where NFT CollaBot responds to user with an output
 with contextlib.suppress(KeyError):
