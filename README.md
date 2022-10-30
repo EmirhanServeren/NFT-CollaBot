@@ -33,12 +33,16 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 
 >Completed
 * Understanding objkt.com API *-Glosarry on Readme File*
-* Creating Modules to Extract and Analyze Data *-Jupyter Notebook*
+* Creating Modules to Extract and Analyze Sale Data *-Jupyter Notebook*
+* Creating Modules to Recommand Random NFTs by Tag
+
 >In Progress
 * Deploying on [Streamlit](https://emirhanserveren-nft-collabot-deploy-mml6j8.streamlitapp.com/) *-deploy.py script*
+
 >Future Objective
 * Deploying on Discord 
 * Deploying on Twitter
+* Solana Marketplaces *(exchange.art, formfunction)* Extension
 
 ## HOW NFT COLLABOT WORKS?
 
@@ -50,11 +54,13 @@ In Streamlit, NFT CollaBot only contains an input component that asks for the us
 
 ```mermaid
 sequenceDiagram
-    participant user
+    actor user
     participant nft_collabot
     user->>nft_collabot: gives input
-    nft_collabot->>nft_collabot: process by input
+    activate nft_collabot
+    Note right of nft_collabot: process data using the input
     nft_collabot->>user: presents stat
+    deactivate nft_collabot
 ```
 
 ## HOW TO READ CODE?
@@ -81,9 +87,13 @@ The script is constructed with function method. There are functions that invoked
 |creator_primary_sales_df(wallet_address) | Performs data cleaning and analysis in the function for evaluating an output. |creator_primary_NFT_sales() | Token Trade | |
 
 
+### BONUS: AUTHOR NOTE
 
+As an artist and a newbie data professional, tried to do my best and put my effort to provide all artist data-oriented software product. I strongly believe data can construct sustainable tomorrows for our world and community. As in every case, data can bring a value and sustainability in NFT Community.  I hope this open-source project will be observed and used by many developers and artists. I would be appriciated if I can accomplish to contribute the journey of every artist in NFT community.
 
+I would like to finish the document with a note and an animation of mine created for NFT CollaBot.
 
+<img src="https://assets.objkt.media/file/assets-003/QmfAgy4vCKPJK3S8RdzuASL4B2wjoQVhuV9VV4NiBYPzr7/artifact" width="610" height="610">
 
 
 
