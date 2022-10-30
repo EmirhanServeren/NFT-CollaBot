@@ -70,8 +70,8 @@ The script is constructed with function method. There are functions that invoked
 |**function name**|**technical description**|**dependent function(s)**|**category**|**user-level explanation**|
 |:-:|--|--|:-:|--|
 |check_API_launch_datetime()| NFT Marketplace objkt.com's API is going to move on version 3 endpoint on 30-Jan-2023 <br /> the script checks for the current API endpoint |- | API-Related | - |
-|findWalletAddress_byTwitter(twitter_address)|  | | Input Handling | Enables users to ask their statistics by using their twitter username registered to their tezos profile as an input |
-|findWalletAddress_byTezDomain(tezos_domain)| | | Input Handling | Enables users to ask their statistics by using their tezos domain as an input |
+|findWalletAddress_byTwitter(twitter_address)|  | - | Input Handling | Enables users to ask their statistics by using their twitter username registered to their tezos profile as an input |
+|findWalletAddress_byTezDomain(tezos_domain)| | - | Input Handling | Enables users to ask their statistics by using their tezos domain as an input |
 |isWalletAddress(wallet_address)| Requests to [tzkt.io](https://tzkt.io/) API endpoint using the user input and checks is there any wallet address matches on Tezos ecosystem with this input | - | Input Handling |The platform warns the users for the wrong inputs|
 |isAvailableWalletAddress(wallet_address) | | isWalletAddress()| Input Handling | |
 |recognize_user_input(user_input) | | isWalletAddress(), findWalletAddress_byTwitter(), findWalletAddress_byTezDomain()| Input Handling |Identifies user's input type|
