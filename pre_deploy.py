@@ -499,12 +499,114 @@ def creator_all_sales_df(wallet_address):
 
     return pd.concat([primary_df,secondary_df],axis=1)
 
+def creator_primarySales_byEditions_df(wallet_address):
+    creator_primary_sales_dataFrame=creator_primary_NFT_sales(wallet_address)
+
+    # deleting unnecessary attributes from data frame
+    del creator_primary_sales_dataFrame['buyer_address']
+    del creator_primary_sales_dataFrame['price']
+
+    # manipulate timestamp attribute data type as date
+    creator_primary_sales_dataFrame['timestamp']=pd.to_datetime(creator_primary_sales_dataFrame['timestamp']).dt.date
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda dt: dt.replace(day=1))
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+
+    creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.groupby('timestamp').count()
+
+    # implementing the same algorithm with the function above to fill missing months, in case they exist
+    firstMintDate_ofCreator=creator_allCreated_NFTs(wallet_address)
+    firstMintDate_ofCreator=firstMintDate_ofCreator.loc[0]['timestamp']
+    firstMintDate_ofCreator=firstMintDate_ofCreator.strftime('%Y-%m')
+
+    def date_range_df(firstMintDate_ofCreator):
+        sale_date_range = pd.date_range(
+                            start=firstMintDate_ofCreator,
+                            end=creator_primary_sales_dataFrame.index[len(creator_primary_sales_dataFrame)-1]).to_period('m')
+        sale_date_range=pd.DataFrame(sale_date_range)
+        sale_date_range=sale_date_range.drop_duplicates(keep="first")
+        sale_date_range['token_pk']= 0
+        sale_date_range=sale_date_range.rename(columns={0:'timestamp'})
+        sale_date_range['timestamp'] = sale_date_range['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+        sale_date_range=sale_date_range.groupby('timestamp').sum()
+        return sale_date_range
+
+    creator_primary_sales=date_range_df(firstMintDate_ofCreator)
+
+    creator_primary_sales=creator_primary_sales.reset_index()
+    creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reset_index()
+
+    creator_primary_sales['token_pk']=creator_primary_sales['timestamp'].map(creator_primary_sales_dataFrame.set_index('timestamp')['token_pk'])
+    creator_primary_sales=creator_primary_sales.fillna(0)
+
+    creator_primary_sales['token_pk']=creator_primary_sales['token_pk'].astype(int)
+    creator_primary_sales=creator_primary_sales.rename(columns={'token_pk':'sold_editions'})
+
+    return creator_primary_sales
+
+def creator_secondarySales_byEditions_df(wallet_address):
+    creator_secondary_sales_dataFrame=creator_secondary_NFT_sales(wallet_address)
+
+    # deleting unnecessary attributes from data frame
+    del creator_secondary_sales_dataFrame['buyer_address']
+    del creator_secondary_sales_dataFrame['price']
+
+    # manipulate timestamp attribute data type as date
+    creator_primary_sales_dataFrame['timestamp']=pd.to_datetime(creator_primary_sales_dataFrame['timestamp']).dt.date
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda dt: dt.replace(day=1))
+    creator_primary_sales_dataFrame['timestamp']=creator_primary_sales_dataFrame['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+
+    creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.groupby('timestamp').count()
+
+    # implementing the same algorithm with the function above to fill missing months, in case they exist
+    firstMintDate_ofCreator=creator_allCreated_NFTs(wallet_address)
+    firstMintDate_ofCreator=firstMintDate_ofCreator.loc[0]['timestamp']
+    firstMintDate_ofCreator=firstMintDate_ofCreator.strftime('%Y-%m')
+
+    def date_range_df(firstMintDate_ofCreator):
+        sale_date_range = pd.date_range(
+                            start=firstMintDate_ofCreator,
+                            end=creator_primary_sales_dataFrame.index[len(creator_primary_sales_dataFrame)-1]).to_period('m')
+        sale_date_range=pd.DataFrame(sale_date_range)
+        sale_date_range=sale_date_range.drop_duplicates(keep="first")
+        sale_date_range['token_pk']= 0
+        sale_date_range=sale_date_range.rename(columns={0:'timestamp'})
+        sale_date_range['timestamp'] = sale_date_range['timestamp'].apply(lambda x: x.strftime('%Y-%m'))
+        sale_date_range=sale_date_range.groupby('timestamp').sum()
+        return sale_date_range
+
+    creator_primary_sales=date_range_df(firstMintDate_ofCreator)
+
+    creator_primary_sales=creator_primary_sales.reset_index()
+    creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reset_index()
+
+    creator_primary_sales['token_pk']=creator_primary_sales['timestamp'].map(creator_primary_sales_dataFrame.set_index('timestamp')['token_pk'])
+    creator_primary_sales=creator_primary_sales.fillna(0)
+
+    creator_primary_sales['token_pk']=creator_primary_sales['token_pk'].astype(int)
+    creator_primary_sales=creator_primary_sales.rename(columns={'token_pk':'sold_editions'})
+
+    return creator_primary_sales
+
+def creator_all_sales_byEditions_df(wallet_address):
+    primary_df = creator_primarySales_byEditions_df(wallet_address)
+    secondary_df = creator_secondarySales_byEditions_df(wallet_address)
+
+    primary_df=primary_df.set_index('timestamp')
+    secondary_df=secondary_df.set_index('timestamp')
+
+    primary_df=primary_df.rename(columns={'sold_editions':'sold_editions_onPrimary'})
+    secondary_df=secondary_df.rename(columns={'sold_editions':'sold_editions_onSecondary'})
+
+    return pd.concat([primary_df,secondary_df],axis=1)
+
 # the part where NFT CollaBot responds to user with an output
 with contextlib.suppress(KeyError):
     if recognize_user_input(st_user_input) is False:
-        #st.write(recognize_user_input(st_user_input))
         recognize_user_input(st_user_input)
     else:
-        #st.write(creator_primary_sales_df(recognize_user_input(st_user_input)))
+        st.bar_chart(creator_all_sales_df(recognize_user_input(st_user_input)))
+        #st.line_chart(creator_all_sales_byEditions_df(recognize_user_input))
+
         st.write(creator_all_sales_df(recognize_user_input(st_user_input)))
+        #st.write(creator_all_sales_byEditions_df(recognize_user_input))
 
