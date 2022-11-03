@@ -393,6 +393,7 @@ def creator_secondary_NFT_sales_royalties(wallet_address):
             amount
             }
         }
+        timestamp
     }
     }"""
     def send_request(query_input):                 # the function is too complicated so wanted to minimize using a function
@@ -449,6 +450,9 @@ def creator_secondary_NFT_sales(wallet_address):
     secondary_sales_df = secondary_sales_df.rename(columns={'token':'royalties'})   # rename to understand purpose of the attribute better
     secondary_sales_df['artist_income'] = (secondary_sales_df[["price", "royalties"]].product(axis=1))
     secondary_sales_df['artist_income'] = secondary_sales_df['artist_income']/100000000
+
+    # drop duplicate 'timestamp' column from the data frame
+    secondary_sales_df = secondary_sales_df.loc[:,~secondary_sales_df.T.duplicated(keep='last')]
 
     return secondary_sales_df
 
