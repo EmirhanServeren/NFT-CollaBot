@@ -599,7 +599,7 @@ with contextlib.suppress(KeyError):
         recognize_user_input(st_user_input)
     else:
         page_column_1.bar_chart(creator_all_sales_df(recognize_user_input(st_user_input)))
-        page_column_2.dataframe(creator_all_sales_df(recognize_user_input(st_user_input)))
+        page_column_1.dataframe(creator_all_sales_df(recognize_user_input(st_user_input)))
 
-        page_column_1.line_chart(creator_all_sales_byEditions_df(recognize_user_input(st_user_input)))
+        page_column_2.line_chart(creator_all_sales_byEditions_df(recognize_user_input(st_user_input)))
         page_column_2.dataframe(creator_all_sales_byEditions_df(recognize_user_input(st_user_input)))
