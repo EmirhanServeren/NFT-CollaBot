@@ -39,9 +39,10 @@ There are many achievements of NFT CollaBot. To accomplish, it is inevitable to 
 * Creating Modules to Recommand Random NFTs by Tag
 
 >In Progress
-* Deploying on [Streamlit](https://emirhanserveren-nft-collabot-deploy-mml6j8.streamlitapp.com/) *-deploy.py script*
+* Deploying Statistics Modules on [Streamlit](https://emirhanserveren-nft-collabot-deploy-mml6j8.streamlitapp.com/) *-deploy.py script*
 
 >Future Objective
+* Deploying Random NFT Recommendation Modules on Streamlit
 * Deploying on Discord 
 * Deploying on Twitter
 * Solana Marketplaces *(exchange.art, formfunction)* Extension
