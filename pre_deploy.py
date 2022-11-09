@@ -589,9 +589,75 @@ def creator_all_sales_byEditions_df(wallet_address):
 
     return all_sales_byEditions_df
 
+def creator_primarySales_byTokens(wallet_address):
+    creator_primary_sales_dataFrame=creator_primary_NFT_sales(wallet_address)
+
+    # group by token primary key to find summation of price value
+    creator_primary_sales_dataFrame = creator_primary_sales_dataFrame.groupby('token_pk').sum()
+
+    def create_primaryKey_df(wallet_address):
+        token_pk_dataframe=creator_allCreated_NFTs(wallet_address)
+        token_pk_dataframe['price']=0
+        del token_pk_dataframe['timestamp']
+        return token_pk_dataframe
+
+    creator_tokens=create_primaryKey_df(wallet_address)
+    creator_primary_sales_dataFrame=creator_primary_sales_dataFrame.reset_index()
+
+    # fill tokens with no primary sale with 0 value
+    creator_tokens['price']=creator_tokens['token_pk'].map(creator_primary_sales_dataFrame.set_index('token_pk')['price'])
+    creator_tokens=creator_tokens.fillna(0)
+
+    creator_tokens['token_pk']=creator_tokens['token_pk'].astype(int)
+    creator_tokens['price']=creator_tokens['price']/1000000
+    creator_tokens=creator_tokens.rename(columns={'price':'primary_income'})
+
+    return creator_tokens
+
+def creator_secondarySales_byTokens(wallet_address):
+    creator_secondary_sales_dataFrame=creator_secondary_NFT_sales(wallet_address)
+
+    # group by token primary key to find summation of price value
+    creator_secondary_sales_dataFrame = creator_secondary_sales_dataFrame.groupby('token_pk').sum()
+    del creator_secondary_sales_dataFrame['royalties']
+    del creator_secondary_sales_dataFrame['price']
+
+    def create_primaryKey_df(wallet_address):
+        token_pk_dataframe=creator_allCreated_NFTs(wallet_address)
+        token_pk_dataframe['artist_income']=0
+        del token_pk_dataframe['timestamp']
+        return token_pk_dataframe
+
+    creator_tokens =create_primaryKey_df(wallet_address)
+    creator_secondary_sales_dataFrame = creator_secondary_sales_dataFrame.reset_index()
+
+    # fill tokens with no primary sale with 0 value
+    creator_tokens['artist_income']=creator_tokens['token_pk'].map(creator_secondary_sales_dataFrame.set_index('token_pk')['artist_income'])
+    creator_tokens=creator_tokens.fillna(0)
+
+    creator_tokens['token_pk']=creator_tokens['token_pk'].astype(int)
+    creator_tokens=creator_tokens.rename(columns={'artist_income':'secondary_income'})
+
+    return creator_tokens
+
+def creator_all_sales_byTokens_df(wallet_address):
+    primary_df = creator_primarySales_byTokens(wallet_address)
+    secondary_df = creator_secondarySales_byTokens(wallet_address)
+
+    primary_df=primary_df.set_index('token_pk')
+    secondary_df=secondary_df.set_index('token_pk')
+
+    all_sales_ofTokens_df=pd.concat([primary_df,secondary_df],axis=1)
+    all_sales_ofTokens_df['total_income']=all_sales_ofTokens_df['primary_income']+all_sales_ofTokens_df['secondary_income']
+    del all_sales_ofTokens_df['primary_income']
+    del all_sales_ofTokens_df['secondary_income']
+
+    return all_sales_ofTokens_df.reset_index()
+
 # create sidebar and other sub-page components here
-st.sidebar.write("NFT CollaBot is a data-oriented project designed by the requirements of NFT ecosystem and aims to strengthen community.")
-page_column_1,page_column_2=st.columns(2)
+st.sidebar.write("NFT CollaBot is a data-oriented project designed by the requirements of NFT ecosystem and aims to strengthen community. Provides statistics for NFT artists on Tezos.")
+st.sidebar.markdown("<p style='text-align: bottom-left; color: grey;'>An open-source project designed by Emirhan Serveren and presented on GitHub for every member of the NFT Community. </p>",unsafe_allow_html=True)
+page_column_1,page_column_2,page_column_3=st.columns(3)
 
 # the part where NFT CollaBot responds to user with an output
 with contextlib.suppress(KeyError):
@@ -603,3 +669,5 @@ with contextlib.suppress(KeyError):
 
         page_column_2.line_chart(creator_all_sales_byEditions_df(recognize_user_input(st_user_input)))
         page_column_2.dataframe(creator_all_sales_byEditions_df(recognize_user_input(st_user_input)))
+
+        page_column_3.dataframe(creator_all_sales_byTokens_df(recognize_user_input(st_user_input)))
