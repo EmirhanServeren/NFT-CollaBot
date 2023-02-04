@@ -20,17 +20,7 @@ st.title('NFT CollaBot')
 st_user_input=st.text_input('Please enter your Tezos Wallet Address/Domain or Twitter Username registered to your Tezos Profile:')
 
 # objktcom api endpoint will be used for several times to evaluate queries
-api_endpoint = 'https://data.objkt.com/v2/graphql'
-# check for the new API endpoint launch time, activate new endpoint in case the time has come
-def check_API_launch_datetime():
-    new_API_launchTime = date(2023,1,20)    # assign the launch time
-    current_date=date.today()
-    if current_date<new_API_launchTime:     # if earlier than the launch time
-        return api_endpoint
-    else:
-        return 'https://data.objkt.com/v3/graphql'
-
-check_API_launch_datetime()
+api_endpoint = 'https://data.objkt.com/v3/graphql'
 
 def findWalletAddress_byTwitter(twitter_address):
     creator_walletAddress_byTwitter_query="""query MyQuery {
